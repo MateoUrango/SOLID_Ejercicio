@@ -1,7 +1,7 @@
 // ==========================================================
 // Sistema de gestión de pedidos de un restaurante (versión CON violaciones)
 // ==========================================================
-
+/*
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,3 +150,5 @@ class Cajero implements PuedeCobrar {
         System.out.println("El cajero cobra en caja.");
     }
 }
+
+*/

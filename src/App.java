@@ -1,32 +1,46 @@
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {
+        // Pedido y descuento
+        PedidoRestaurante pedido = new PedidoRestaurante("Mateo", "VIP");
+        pedido.agregarPlato("Hamburguesa", 25000);
+        pedido.agregarPlato("Jugo", 5000);
 
-        Pedido pedido = new Pedido();
-        pedido.setCliente("Ana");
-        pedido.setTipoCliente("VIP");
-        pedido.agregarPlato("Bandeja paisa", 28000);
-        pedido.agregarPlato("Limonada", 6000);
+        ControladorDescuentos controladorDescuentos = new ControladorDescuentos();
+        Descuento descuento = controladorDescuentos.obtenerDescuento(pedido);
+        CalculadoraTotal calculadoraTotal = new CalculadoraTotal();
+        double total = calculadoraTotal.calcularTotal(pedido, descuento);
+        System.out.println("Total del pedido: $" + total);
 
-        System.out.println("Total: " + pedido.calcularTotal());
-        pedido.guardarEnBaseDeDatos();
-        pedido.imprimirRecibo();
-        pedido.enviarCorreoConfirmacion();
+        // Base de datos
+        ConexionBaseDatos conexionBaseDatos = new ConexionBaseDatos();
+        conexionBaseDatos.guardar(pedido);
 
-        // El código cliente confía en que TODO MetodoPago se puede cobrar igual...
-        List<MetodoPago> pagosDelDia = List.of(
-            new PagoTarjeta(),
-            new PagoEfectivo(),
-            new PagoPuntosFidelidad()
-        );
+        // Recibo
+        ImpresoraRecibo impresoraRecibo = new ImpresoraRecibo();
+        impresoraRecibo.imprimirRecibo(pedido, total);
 
-        for (MetodoPago pago : pagosDelDia) {
-            pago.cobrar(15000);  // esto revienta con PagoPuntosFidelidad si el monto supera los puntos
-        }
+        // Correo
+        ServicioCorreo servicioCorreo = new ServicioCorreo();
+        servicioCorreo.enviarCorreoConfirmacion(pedido);
 
-        // El mesero queda obligado a "implementar" trabajos que no le corresponden
+        // Métodos de pago
+        MetodoPago pagoTarjeta = new PagoTarjeta();
+        MetodoPago pagoEfectivo = new PagoEfectivo();
+        MetodoPago pagoPuntos = new PagoPuntosFidelidad();
+        pagoTarjeta.cobrar(total);
+        pagoEfectivo.cobrar(total);
+        pagoPuntos.cobrar(10);
+
+        // Personal del restaurante
         Mesero mesero = new Mesero();
+        Cocinero cocinero = new Cocinero();
+        Repartidor repartidor = new Repartidor();
+        Cajero cajero = new Cajero();
+
         mesero.atenderMesa();
+        cocinero.cocinar();
+        repartidor.repartirPedido();
+        cajero.cobrarEnCaja();
     }
 }
