@@ -1,0 +1,28 @@
+# --- Archivos compilados de Java ---
+*.class
+*.jar
+*.war
+*.ear
+
+# --- Carpetas de compilación (Maven / Gradle) ---
+target/
+build/
+out/
+bin/
+
+# --- Configuración de IDEs (IntelliJ / Eclipse / VS Code) ---
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+
+# --- Archivos de sistema operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log

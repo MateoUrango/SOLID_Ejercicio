@@ -1,5 +1,10 @@
 ## Getting Started
 
+proyecto de aplicacion SOLID realizado por: 
+Mateo Enrique Urango Morales - 20241020117  
+Cristian Esteban Castañeda Vargas - 20241020094 
+Santiago Nicolas Triana Mariño - 20241020115
+
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
 ## Folder Structure
